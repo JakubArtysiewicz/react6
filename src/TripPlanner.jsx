@@ -7,7 +7,10 @@ function TripPlanner() {
         liczbaUczestnikow: 1,
         rodzajWycieczkiCena: 300,
         ubezpieczenie: false,
+        cenaKoncowaKoniec: 0,
     })
+    
+    const [wycieczki,setWycieczki] = useState([])
 
     const przecena = wycieczka.liczbaUczestnikow >= 5
 
@@ -37,8 +40,24 @@ function TripPlanner() {
             <p>Rabat grupowy -10%</p>
         }
         <p>Cena {cenaKoncowa} zł</p>
-        <button disabled = {wycieczka.celPodrozy === ""}>Zarezerwuj</button>
-    </div>
+        <button onClick={() => {
+        const nowaWycieczka = {
+            ...wycieczka,
+            cenaKoncowaKoniec: cenaKoncowa
+        };
+
+        setWycieczki([...wycieczki, nowaWycieczka]);
+    }} disabled = {wycieczka.celPodrozy === ""}>Zarezerwuj</button>
+        <p>HISTORIA REZERWACJI</p>
+        <ul>
+            {wycieczki.map((wycieczka,index)=>(
+                <li key={index}>
+                    {wycieczka.celPodrozy}-{wycieczka.rodzajWycieczkiCena}-{wycieczka.cenaKoncowaKoniec}
+                </li>
+                
+            ))}
+        </ul>
+        </div>
   );
 }
 
