@@ -4,10 +4,11 @@ function TripPlanner() {
     const [liczbaDni,setLiczbaDni] = useState(1)
     const [liczbaUczestnikow,setLiczbaUczestnikow] = useState(1)
     const [RodzajWycieczkiCena, setRodzajWycieczkiCena] = useState(300)
+    const [ubezpieczenie,setUbezpieczenie] = useState(true)
 
     const przecena = liczbaUczestnikow >= 5
 
-    const cenaKoncowa = liczbaDni*RodzajWycieczkiCena*liczbaUczestnikow * (przecena? 0.9:1)
+    const cenaKoncowa = liczbaDni*RodzajWycieczkiCena*liczbaUczestnikow * (przecena? 0.9:1) + (ubezpieczenie ? liczbaUczestnikow*liczbaDni*50:0)
     
   return (
     <div>
@@ -23,9 +24,11 @@ function TripPlanner() {
             <label htmlFor="liczbaUczestnikow">Liczba uczestników</label>
             <input id="liczbaUczestnikow" type="number" min={1} defaultValue={1} max={8} onChange={(e)=>setLiczbaUczestnikow(e.target.value)}></input>
             <label htmlFor="liczbaDni">Liczba dni pobytu</label>
-            <input id="liczbaDni" type="number" min={1} defaultValue={1} max={14}></input>
+            <input id="liczbaDni" type="number" min={1} defaultValue={1} max={14} onChange={(e) => setLiczbaDni(e.target.value)}></input>
         </div>
-        <input id="ubezpieczenie" type="checkbox"></input>
+
+        <input id="ubezpieczenie" type="checkbox" onChange={(e) =>  setUbezpieczenie(e.target.checked)}></input>
+
         <label htmlFor="ubezpieczenie">Dodaj ubezpieczenie (+50zł/os./dzień)</label>
         { przecena && 
             <p>Rabat grupowy -10%</p>
