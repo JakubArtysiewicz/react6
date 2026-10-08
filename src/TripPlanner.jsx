@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import { use, useState } from "react";
 
 function TripPlanner() {
@@ -5,6 +6,7 @@ function TripPlanner() {
         celPodrozy: "",
         liczbaDni: 1,
         liczbaUczestnikow: 1,
+        rodzajWycieczki: "Miejska",
         rodzajWycieczkiCena: 300,
         ubezpieczenie: false,
         cenaKoncowaKoniec: 0,
@@ -22,9 +24,9 @@ function TripPlanner() {
         <label htmlFor="cel">Cel podróży</label>
         <input id="cel" onChange={(e) => setWycieczka({...wycieczka, celPodrozy: e.target.value})} ></input>
         <div>
-            <button onClick={()=> setWycieczka({...wycieczka, rodzajWycieczkiCena:300})}>Miejska</button>
-            <button onClick={()=> setWycieczka({...wycieczka, rodzajWycieczkiCena:450})} >Górska</button>
-            <button onClick={()=> setWycieczka({...wycieczka, rodzajWycieczkiCena:600})} >Nadmorska</button>
+            <button onClick={()=> setWycieczka({...wycieczka, rodzajWycieczki:"Miejska", rodzajWycieczkiCena:300})}>Miejska</button>
+            <button onClick={()=> setWycieczka({...wycieczka, rodzajWycieczki:"Górska", rodzajWycieczkiCena:450})} >Górska</button>
+            <button onClick={()=> setWycieczka({...wycieczka, rodzajWycieczki:"Nadmorska", rodzajWycieczkiCena:600})} >Nadmorska</button>
         </div>
         <div>
             <label htmlFor="liczbaUczestnikow">Liczba uczestników</label>
@@ -52,12 +54,12 @@ function TripPlanner() {
         <ul>
             {wycieczki.map((wycieczka,index)=>(
                 <li key={index}>
-                    {wycieczka.celPodrozy}-{wycieczka.rodzajWycieczkiCena}-{wycieczka.cenaKoncowaKoniec}
+                    {wycieczka.celPodrozy}-{wycieczka.rodzajWycieczki}-{wycieczka.cenaKoncowaKoniec}
                 </li>
                 
             ))}
         </ul>
-        </div>
+    </div>
   );
 }
 
